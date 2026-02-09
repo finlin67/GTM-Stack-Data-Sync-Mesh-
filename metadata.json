@@ -1,0 +1,5 @@
+{
+  "name": "GTM Stack Data Sync Mesh",
+  "description": "A high-fidelity, dark-mode dashboard for monitoring data sync operations, featuring real-time metrics, pipeline node details, and a visual mesh map.",
+  "requestFramePermissions": []
+}
