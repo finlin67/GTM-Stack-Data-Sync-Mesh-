@@ -158,7 +158,7 @@ function DashboardHome({
               animate={{ opacity: [1, 0.4, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
             />
-            <span className="text-emerald-500 text-[10px] font-bold tracking-tight">ONLINE</span>
+            <span className="text-emerald-500 text-[10px] font-bold tracking-tight uppercase">Online</span>
           </div>
           <button className="text-slate-400 hover:text-white transition-colors">
               <Settings size={16} />
@@ -212,7 +212,7 @@ function DashboardHome({
               <h3 className="text-white text-xs font-bold uppercase tracking-wider">Pipelines</h3>
               <Filter className="text-slate-500 cursor-pointer hover:text-white" size={14} />
             </div>
-            <div className="flex-1 overflow-y-auto [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-white/10 [&::-webkit-scrollbar-thumb]:rounded-full">
+            <div className="flex-1 overflow-y-auto custom-scrollbar">
               <table className="w-full text-left border-collapse">
                 <thead className="sticky top-0 bg-[#161822] z-10 border-b border-white/10">
                   <tr>
@@ -299,22 +299,48 @@ function DashboardHome({
                 </AnimatePresence>
 
                 <div className="relative size-32 flex items-center justify-center scale-90 sm:scale-100">
-                  <svg className="absolute inset-0 w-full h-full pointer-events-none">
-                      <line x1="50%" y1="50%" x2="20%" y2="20%" stroke="rgba(255,255,255,0.1)" strokeWidth="1" strokeDasharray="2 2" />
-                      <motion.circle r="1.5" fill="#38bdf8" animate={{ cx: ["20%", "50%"], cy: ["20%", "50%"], opacity: [0, 1, 0] }} transition={{ duration: 1.5, repeat: Infinity, delay: 0 }} />
-                      <line x1="50%" y1="50%" x2="80%" y2="20%" stroke="rgba(255,255,255,0.1)" strokeWidth="1" strokeDasharray="2 2" />
-                      <motion.circle r="1.5" fill="#e879f9" animate={{ cx: ["80%", "50%"], cy: ["20%", "50%"], opacity: [0, 1, 0] }} transition={{ duration: 1.8, repeat: Infinity, delay: 0.2 }} />
-                      <line x1="50%" y1="50%" x2="20%" y2="80%" stroke="rgba(255,255,255,0.1)" strokeWidth="1" strokeDasharray="2 2" />
-                      <motion.circle r="1.5" fill="#34d399" animate={{ cx: ["20%", "50%"], cy: ["80%", "50%"], opacity: [0, 1, 0] }} transition={{ duration: 1.2, repeat: Infinity, delay: 0.5 }} />
-                      <line x1="50%" y1="50%" x2="80%" y2="80%" stroke="rgba(255,255,255,0.1)" strokeWidth="1" strokeDasharray="2 2" />
-                      <motion.circle r="1.5" fill="#5a5cf2" animate={{ cx: ["50%", "80%"], cy: ["50%", "80%"], opacity: [0, 1, 0] }} transition={{ duration: 1.4, repeat: Infinity, delay: 0.8 }} />
+                  <svg className="absolute inset-0 w-full h-full pointer-events-none overflow-visible">
+                      {/* Connection 1: Top Left (Sky) */}
+                      <line x1="50%" y1="50%" x2="20%" y2="20%" stroke="rgba(56, 189, 248, 0.1)" strokeWidth="1" />
+                      <motion.line 
+                        x1="50%" y1="50%" x2="20%" y2="20%" 
+                        stroke="#38bdf8" strokeWidth="1.5" strokeOpacity="0.5" strokeDasharray="6 18"
+                        animate={{ strokeDashoffset: [0, 24], strokeOpacity: [0.3, 0.6, 0.3] }}
+                        transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                      />
+                      
+                      {/* Connection 2: Top Right (Fuchsia) */}
+                      <line x1="50%" y1="50%" x2="80%" y2="20%" stroke="rgba(232, 121, 249, 0.1)" strokeWidth="1" />
+                      <motion.line 
+                        x1="50%" y1="50%" x2="80%" y2="20%" 
+                        stroke="#e879f9" strokeWidth="1.5" strokeOpacity="0.5" strokeDasharray="4 14"
+                        animate={{ strokeDashoffset: [0, -18], strokeOpacity: [0.3, 0.6, 0.3] }}
+                        transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+                      />
+
+                      {/* Connection 3: Bottom Left (Emerald) */}
+                      <line x1="50%" y1="50%" x2="20%" y2="80%" stroke="rgba(52, 211, 153, 0.1)" strokeWidth="1" />
+                      <motion.line 
+                        x1="50%" y1="50%" x2="20%" y2="80%" 
+                        stroke="#34d399" strokeWidth="1.5" strokeOpacity="0.5" strokeDasharray="8 20"
+                        animate={{ strokeDashoffset: [0, 28], strokeOpacity: [0.3, 0.6, 0.3] }}
+                        transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                      />
+
+                      {/* Connection 4: Bottom Right (Primary) */}
+                      <line x1="50%" y1="50%" x2="80%" y2="80%" stroke="rgba(90, 92, 242, 0.1)" strokeWidth="1" />
+                      <motion.line 
+                        x1="50%" y1="50%" x2="80%" y2="80%" 
+                        stroke="#5a5cf2" strokeWidth="1.5" strokeOpacity="0.5" strokeDasharray="5 15"
+                        animate={{ strokeDashoffset: [0, -20], strokeOpacity: [0.3, 0.6, 0.3] }}
+                        transition={{ duration: 1.8, repeat: Infinity, ease: "linear" }}
+                      />
                   </svg>
 
                   <motion.div 
-                      className="size-16 rounded-full flex items-center justify-center relative z-10 cursor-pointer"
-                      style={{ background: 'radial-gradient(circle at center, #5a5cf2 0%, #111118 100%)', boxShadow: '0 0 20px rgba(90, 92, 242, 0.3)' }}
-                      animate={{ boxShadow: ["0 0 20px rgba(90, 92, 242, 0.3)", "0 0 35px rgba(90, 92, 242, 0.5)", "0 0 20px rgba(90, 92, 242, 0.3)"] }}
-                      transition={{ duration: 4, repeat: Infinity }}
+                      className="size-16 rounded-full flex items-center justify-center relative z-10 cursor-pointer warehouse-hub"
+                      animate={{ scale: [1, 1.05, 1] }}
+                      transition={{ duration: 4, repeat: Infinity, repeatType: "mirror" as const }}
                       onMouseEnter={() => setHoveredNodeId('eventbus')}
                       onMouseLeave={() => setHoveredNodeId(null)}
                   >
@@ -349,7 +375,7 @@ function DashboardHome({
                       <CreditCard size={12} />
                   </motion.div>
                   <motion.div 
-                    className="absolute bottom-2 right-2 p-1.5 rounded bg-primary/10 text-primary border border-primary/20 cursor-pointer z-20" 
+                    className="absolute bottom-2 right-2 p-1.5 rounded bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 cursor-pointer z-20" 
                     animate={{y: [0,4,0]}} 
                     transition={{duration:3.2, repeat:Infinity, repeatType: "mirror" as const}}
                     onMouseEnter={() => setHoveredNodeId('ml')}
@@ -367,7 +393,7 @@ function DashboardHome({
                     <div className="h-1 w-full bg-slate-800 rounded-full overflow-hidden">
                       <motion.div 
                         className="bg-[#5a5cf2] h-full"
-                        animate={{ width: `${(stats.inflow / 6) * 100}%` }}
+                        animate={{ width: `${Math.min(100, (stats.inflow / 6) * 100)}%` }}
                       />
                     </div>
                     <div className="flex justify-between text-[9px] font-mono">
@@ -400,11 +426,11 @@ function LogsView() {
         <div className="flex items-center gap-3">
            <History className="text-slate-400" size={16} />
            <h2 className="text-white text-sm font-bold tracking-tight">System Logs</h2>
-           <span className="px-2 py-0.5 rounded-full bg-slate-800 text-[10px] text-slate-400 font-mono">Live Tail</span>
+           <span className="px-2 py-0.5 rounded-full bg-slate-800 text-[10px] text-slate-400 font-mono uppercase">Live Tail</span>
         </div>
       </header>
 
-      <div className="flex-1 overflow-auto [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-white/10 [&::-webkit-scrollbar-thumb]:rounded-full p-4">
+      <div className="flex-1 overflow-auto custom-scrollbar p-4">
          <div className="rounded-xl border border-white/10 bg-white/5 overflow-hidden">
             <table className="w-full text-left border-collapse">
                <thead className="bg-[#161822] text-xs font-bold text-slate-500 uppercase tracking-wider border-b border-white/10">
@@ -465,7 +491,7 @@ function AlertsView({
         </div>
       </header>
 
-      <div className="flex-1 overflow-y-auto [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-white/10 [&::-webkit-scrollbar-thumb]:rounded-full p-4 flex flex-col gap-6">
+      <div className="flex-1 overflow-y-auto custom-scrollbar p-4 flex flex-col gap-6">
         
         {/* Active Alerts Section */}
         <section>
@@ -508,7 +534,7 @@ function AlertsView({
                     </div>
                     <button 
                       onClick={() => onResolve(alert.id)}
-                      className="text-[10px] font-bold text-slate-500 hover:text-white px-2 py-1 rounded-lg border border-white/10 hover:bg-white/10 transition-all opacity-0 group-hover:opacity-100"
+                      className="text-[10px] font-bold text-slate-500 hover:text-white px-2 py-1 rounded-lg border border-white/10 hover:bg-white/10 transition-all sm:opacity-0 group-hover:opacity-100"
                     >
                       Acknowledge
                     </button>
@@ -634,10 +660,10 @@ export default function RevOpsDashboard() {
       latency: 128,
       records: '428',
       icon: BrainCircuit,
-      colorClass: 'text-primary',
-      bgClass: 'bg-primary/20',
-      statusColorClass: 'text-primary',
-      statusBgClass: 'bg-primary/20',
+      colorClass: 'text-indigo-400',
+      bgClass: 'bg-indigo-500/10',
+      statusColorClass: 'text-indigo-400',
+      statusBgClass: 'bg-indigo-400/10',
     },
     {
       id: 'eventbus',
@@ -688,7 +714,6 @@ export default function RevOpsDashboard() {
             const threshold = thresholds[node.id];
             if (newLatency > threshold) {
               setAlerts(prev => {
-                // Check if we already have an active alert for this node to avoid spam
                 const hasActive = prev.some(a => a.nodeId === node.id && !a.resolved);
                 if (hasActive) return prev;
                 
@@ -700,7 +725,7 @@ export default function RevOpsDashboard() {
                   threshold: threshold,
                   timestamp: now,
                   resolved: false
-                }, ...prev].slice(0, 20); // Keep last 20
+                }, ...prev].slice(0, 20);
               });
             }
 
